@@ -1,0 +1,96 @@
+# PROTECTED - NEVER DISABLE. Matched as regex (grep -E) against package names.
+# The script refuses to disable anything matching a line here, even if you
+# pass it in by hand. Fail-closed by design.
+#
+# Your rules named TCL packages; this TV is a Hisense, so the TCL names will
+# not exist on it. Each rule is translated to the brand-agnostic equivalent
+# plus the Hisense / MediaTek / MStar names that do the same job.
+
+# --- RULE: com.tcl.suspension -> the Inputs/Source quick panel ---
+# Hisense/MediaTek equivalents. com.mediatek.wwtv.tvcenter is the big one:
+# on MediaTek-based Hisense sets it IS the input/source + live TV surface.
+com\.mediatek\.wwtv\.tvcenter
+com\.mediatek\.tvinput
+com\.mediatek\.tv
+com\.mstar\.tv
+com\.hisense\.tvui
+com\.hisense\.suspension
+com\.hisense\.quickpanel
+com\.hisense\.signal
+
+# --- RULE: com.tcl.tv / com.tcl.tvinput -> HDMI / antenna input services ---
+# Generic suffix match catches any vendor's input plumbing.
+\.tvinput
+\.inputsource
+\.tvsource
+\.tvprovider
+com\.android\.tv\.settings
+com\.google\.android\.tv\.frameworkpackagestubs
+com\.android\.providers\.tv
+
+# --- RULE: remote control (tcl_bt_rcu_service, autopair) ---
+com\.google\.android\.tv\.remote\.service
+com\.google\.android\.tv\.remotepairing
+com\.google\.android\.tv\.pairing
+\.rcu
+\.autopair
+com\.android\.bluetooth
+com\.android\.bluetoothmidiservice
+
+# --- RULE: Play Services / Play Store ---
+com\.google\.android\.gms
+com\.google\.android\.gsf
+com\.android\.vending
+
+# --- RULE: fused location (disabling = boot loop) ---
+com\.android\.location\.fused
+
+# --- RULE: *.inputmethod.* -> on-screen keyboard ---
+inputmethod
+com\.google\.android\.tv\.inputmethod
+com\.android\.inputdevices
+
+# --- RULE: launcher. Stays protected until FLauncher is confirmed working;
+# the launcher step unprotects it deliberately and only then. ---
+com\.google\.android\.apps\.tv\.launcherx
+com\.google\.android\.tvlauncher
+com\.google\.android\.leanbacklauncher
+
+# --- Your own acceptance tests depend on these. Netflix and YouTube must open. ---
+com\.netflix\.ninja
+com\.netflix\.mediaclient
+com\.google\.android\.youtube\.tv
+com\.google\.android\.youtube\.tvunplugged
+
+# --- Sound is one of your test criteria. Never touch audio. ---
+\.audio
+dolby
+\.dts
+com\.hisense\.sound
+
+# --- Core Android. Disabling any of these bricks or bootloops the TV. ---
+^android$
+com\.android\.systemui
+com\.android\.settings
+com\.android\.providers\.
+com\.android\.packageinstaller
+com\.google\.android\.packageinstaller
+com\.android\.shell
+com\.android\.keychain
+com\.android\.webview
+com\.google\.android\.webview
+com\.android\.wifi
+com\.android\.networkstack
+com\.android\.captiveportallogin
+com\.android\.certinstaller
+com\.android\.se
+com\.android\.externalstorage
+com\.android\.documentsui
+com\.android\.mtp
+com\.google\.android\.ext\.
+com\.google\.android\.permissioncontroller
+com\.android\.permissioncontroller
+com\.google\.android\.tv\.axel
+com\.android\.server\.
+com\.google\.android\.overlay
+com\.android\.systemui\.overlay

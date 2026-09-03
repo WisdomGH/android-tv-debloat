@@ -1,0 +1,43 @@
+# GROUP 1 - "definitely junk". Format: package|what this was
+# These are only ever acted on if they ACTUALLY EXIST on your TV. The script
+# intersects this catalogue with the live package list, so nothing is
+# attempted blindly. Ordered roughly safest-first.
+
+# --- ad + recommendation rows (your #1 goal) ---
+com.google.android.tvrecommendations|Feeds the "Recommended for you" / sponsored rows on the home screen.
+com.google.android.leanbacklauncher.recommendations|Older recommendation-row provider for the leanback home screen.
+com.google.android.tungsten.setupwraith|Google TV setup wizard; only runs at first boot / factory reset.
+com.google.android.tv.provision|One-shot provisioning agent, idle after initial setup.
+
+# --- telemetry / feedback / partner reporting ---
+com.google.android.feedback|Sends crash + usage feedback reports to Google.
+com.google.android.bugreportsender|Uploads bug reports.
+com.google.android.tv.bugreportsender|TV-specific bug report uploader.
+com.google.android.partnersetup|Reports partner/OEM attribution data to Google.
+com.google.android.onetimeinitializer|One-shot first-boot initialiser, dead weight afterwards.
+com.android.statementservice|Verifies app-link statements; harmless to lose on a TV.
+
+# --- screensavers / ambient / wallpaper ---
+com.google.android.backdrop|Google TV ambient screensaver (the photo/art slideshow).
+com.android.dreams.basic|Basic "Daydream" screensavers (clock, colours).
+com.android.dreams.phototable|Photo-table screensaver.
+com.android.wallpaperbackup|Backs up wallpapers; a TV has no wallpaper worth backing up.
+com.android.wallpapercropper|Wallpaper cropping helper.
+
+# --- store demo / retail mode ---
+com.android.retaildemo|Shop-floor demo loop mode.
+com.google.android.tv.retaildemo|Google TV retail demo mode.
+com.hisense.demo|Hisense in-store demo mode.
+
+# --- desktop/phone leftovers with no meaning on a TV ---
+com.android.printspooler|Printing subsystem. There is no printer.
+com.android.bips|Built-in print service.
+com.google.android.printservice.recommendation|Suggests printers to install.
+com.android.bookmarkprovider|Browser bookmark store, unused on a TV.
+com.google.android.syncadapters.contacts|Syncs Google Contacts to the TV.
+com.google.android.syncadapters.calendar|Syncs Google Calendar to the TV.
+com.android.egg|Android version easter egg.
+com.google.ar.core|ARCore augmented-reality runtime; meaningless on a TV.
+com.android.traceur|System tracing / developer profiling tool.
+com.android.cellbroadcastreceiver|Emergency cell-broadcast alerts; the TV has no modem.
+com.android.emergency|Emergency information app.

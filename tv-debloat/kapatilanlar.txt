@@ -1,0 +1,8 @@
+# kapatilanlar.txt - every package disabled, one per line.
+# Written automatically by tv-debloat.sh. Plain package names only, so the
+# one-line undo below works by piping this file straight into pm enable.
+#
+# UNDO EVERYTHING:
+#   grep -v '^#' kapatilanlar.txt | tr -d '\r' | xargs -n1 -I{} adb -s 192.168.86.245:5555 shell pm enable {}
+#
+# (nothing disabled yet - no device has been reached)
