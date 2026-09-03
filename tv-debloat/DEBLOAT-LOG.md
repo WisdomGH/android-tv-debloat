@@ -244,3 +244,22 @@ Owner confirmed 7 checks passed, including casting from phone to YouTube Music
   undo: `adb -s 192.168.86.245:5555 shell pm enable com.jamdeo.tv.mediacenter`
 - `com.hisense.service.message` — Hisense push messaging channel, commonly used for ads/notices.  
   undo: `adb -s 192.168.86.245:5555 shell pm enable com.hisense.service.message`
+
+### batch-04 — APPLIED and verified 2026-09-03
+
+- `android.autoinstalls.config.hisense.laoshan` — Config listing which partner apps get auto-installed; disabling stops bloat reinstalling.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable android.autoinstalls.config.hisense.laoshan`
+- `com.android.cts.ctsshim` — Compatibility Test Suite shim; no runtime function on a retail set.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.cts.ctsshim`
+- `com.android.cts.priv.ctsshim` — Privileged CTS shim; same, no runtime function.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.cts.priv.ctsshim`
+- `com.android.htmlviewer` — Minimal viewer for local HTML (licence/help screens).  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.htmlviewer`
+- `com.android.backupconfirm` — Confirmation dialog for adb backup/restore.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.backupconfirm`
+- `com.android.sharedstoragebackup` — Backup agent for shared storage.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.sharedstoragebackup`
+- `com.google.android.backuptransport` — Ships app data to Google cloud backup.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.backuptransport`
+- `com.mstar.android.tv.disclaimercustomization` — Vendor legal-disclaimer screen shown at boot.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.mstar.android.tv.disclaimercustomization`

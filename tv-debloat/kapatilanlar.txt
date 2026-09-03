@@ -34,3 +34,11 @@ com.google.android.marvin.talkback
 com.hisense.tv.dlna
 com.jamdeo.tv.mediacenter
 com.hisense.service.message
+android.autoinstalls.config.hisense.laoshan
+com.android.cts.ctsshim
+com.android.cts.priv.ctsshim
+com.android.htmlviewer
+com.android.backupconfirm
+com.android.sharedstoragebackup
+com.google.android.backuptransport
+com.mstar.android.tv.disclaimercustomization

@@ -1,0 +1,8 @@
+# Excerpt supplied by owner. NOTE: taken BEFORE the animation change,
+# cache trim and reboot, so it is not the step (f) "after" measurement.
+Total RAM: 1,337,936K (status low)
+ Free RAM:   407,586K (  100,814K cached pss +   131,228K cached kernel +   175,544K free)
+ Used RAM: 1,303,363K (  582,939K used pss +   720,424K kernel)
+ Lost RAM:  -266,291K
+     ZRAM:    75,796K physical used for   214,040K in swap (  524,284K total swap)
+   Tuning: 192 (large 512), oom    81,920K, restore limit    27,306K (low-ram)
