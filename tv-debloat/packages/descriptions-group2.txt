@@ -1,0 +1,18 @@
+air.com.vudu.air.DownloaderTablet|Vudu store/streaming app; the service was folded into Fandango at Home.
+com.amazon.amazonvideo.livingroom|Amazon Prime Video app.
+com.pandora.android.atv|Pandora internet radio app.
+com.seraphic.browser|Hisense's built-in web browser.
+com.google.android.play.games|Google Play Games services.
+com.google.android.youtube.tvkids|YouTube Kids (main YouTube and YouTube Music kept).
+com.google.android.marvin.talkback|TalkBack screen reader (accessibility).
+com.hisense.tv.dlna|Hisense DLNA media sharing; Kodi and VLC cover this.
+com.jamdeo.tv.mediacenter|Hisense/Jamdeo media centre app.
+com.hisense.service.message|Hisense push messaging channel, commonly used for ads/notices.
+android.autoinstalls.config.hisense.laoshan|Config listing which partner apps get auto-installed; disabling stops bloat reinstalling.
+com.android.cts.ctsshim|Compatibility Test Suite shim; no runtime function on a retail set.
+com.android.cts.priv.ctsshim|Privileged CTS shim; same, no runtime function.
+com.android.htmlviewer|Minimal viewer for local HTML (licence/help screens).
+com.android.backupconfirm|Confirmation dialog for adb backup/restore.
+com.android.sharedstoragebackup|Backup agent for shared storage.
+com.google.android.backuptransport|Ships app data to Google cloud backup.
+com.mstar.android.tv.disclaimercustomization|Vendor legal-disclaimer screen shown at boot.

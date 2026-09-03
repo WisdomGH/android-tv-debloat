@@ -218,3 +218,29 @@ inputs/source, HDMI switch, Netflix, YouTube, sound, on-screen keyboard.
 - `com.google.android.tungsten.setupwraith` — Google TV setup wizard; only runs at first boot / factory reset.  
   undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.tungsten.setupwraith`
 
+
+### batch-03 — APPLIED and verified 2026-09-03
+
+Owner confirmed 7 checks passed, including casting from phone to YouTube Music
+(verifying Chromecast still works with Hisense DLNA disabled).
+
+- `air.com.vudu.air.DownloaderTablet` — Vudu store/streaming app; the service was folded into Fandango at Home.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable air.com.vudu.air.DownloaderTablet`
+- `com.amazon.amazonvideo.livingroom` — Amazon Prime Video app.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.amazon.amazonvideo.livingroom`
+- `com.pandora.android.atv` — Pandora internet radio app.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.pandora.android.atv`
+- `com.seraphic.browser` — Hisense's built-in web browser.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.seraphic.browser`
+- `com.google.android.play.games` — Google Play Games services.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.play.games`
+- `com.google.android.youtube.tvkids` — YouTube Kids (main YouTube and YouTube Music kept).  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.youtube.tvkids`
+- `com.google.android.marvin.talkback` — TalkBack screen reader (accessibility).  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.marvin.talkback`
+- `com.hisense.tv.dlna` — Hisense DLNA media sharing; Kodi and VLC cover this.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.hisense.tv.dlna`
+- `com.jamdeo.tv.mediacenter` — Hisense/Jamdeo media centre app.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.jamdeo.tv.mediacenter`
+- `com.hisense.service.message` — Hisense push messaging channel, commonly used for ads/notices.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.hisense.service.message`
