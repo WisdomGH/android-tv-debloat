@@ -251,38 +251,56 @@ cmd_reboot() {
 cmd_launcher() {
   need_device
   hdr "Replacing the home screen with FLauncher"
+  # NOTE: this set is classic Android TV (leanback). There is no
+  # com.google.android.apps.tv.launcherx here. We detect the real HOME owner
+  # instead of hardcoding a package name.
   local fl; fl="$("${A[@]}" shell pm list packages 2>/dev/null | tr -d '\r' | grep -i flauncher)"
   if [ -z "$fl" ]; then
     say "${c_red}FLauncher is not installed yet.${c_rst}"
-    say ""
-    say "On the TV: Play Store > search 'FLauncher' (by Ettore Atalan / oSquare)"
-    say "  1. Install it."
-    say "  2. Open it once."
-    say "  3. Press the Home button; choose FLauncher and 'Always'."
-    say "     (Or: Settings > Apps > Default apps > Home app > FLauncher)"
-    say ""
+    say "  TV > Play Store > search 'FLauncher' > Install > open it once >"
+    say "  press Home > choose FLauncher > Always."
     say "Then re-run: $0 launcher"
     return 1
   fi
   ok "FLauncher present: ${fl#package:}"
+
   local cur; cur="$("${A[@]}" shell cmd package resolve-activity -c android.intent.category.HOME --user 0 2>/dev/null | tr -d '\r' | grep -m1 packageName= | cut -d= -f2)"
   say "  Current HOME handler: ${cur:-unknown}"
   if ! printf '%s' "$cur" | grep -qi flauncher; then
     say ""
-    say "${c_red}FLauncher is installed but is NOT the active home screen.${c_rst}"
-    say "Set it as Home on the TV first (press Home > pick FLauncher > Always),"
-    say "then re-run this. I will not disable launcherx until FLauncher owns Home"
-    say "- doing it early is exactly what leaves you with a black screen."
+    say "${c_red}FLauncher is installed but does NOT own Home.${c_rst}"
+    say "Set it on the TV first. Disabling the stock launcher before that is"
+    say "exactly what leaves you staring at a black screen."
     return 1
   fi
-  ok "FLauncher owns the Home intent. Safe to disable Google's launcher."
-  read -r -p "Disable com.google.android.apps.tv.launcherx now? [y/N] " a
+  ok "FLauncher owns Home. Safe to disable the stock launchers."
+
+  # Candidates actually present on this TV, minus whatever now owns Home.
+  local cands=() p
+  for p in com.google.android.tvlauncher com.google.android.leanbacklauncher com.hisense.tv.customerlauncher; do
+    "${A[@]}" shell pm list packages 2>/dev/null | tr -d '\r' | grep -qx "package:$p" || continue
+    printf '%s' "$cur" | grep -qx "$p" && continue
+    cands+=("$p")
+  done
+  [ "${#cands[@]}" -gt 0 ] || { warn "No stock launcher left to disable."; return 0; }
+
+  say ""
+  say "Will disable: ${cands[*]}"
+  say "${c_yel}com.android.boot.fallbackhome stays enabled - it is your safety net.${c_rst}"
+  read -r -p "Proceed? [y/N] " a
   [ "$a" = y ] || { say "Skipped."; return 0; }
-  "${A[@]}" shell pm disable-user --user 0 com.google.android.apps.tv.launcherx 2>&1 | tr -d '\r'
-  grep -qxF com.google.android.apps.tv.launcherx "$RECORD" 2>/dev/null || \
-    echo com.google.android.apps.tv.launcherx >> "$RECORD"
-  printf -- '- `com.google.android.apps.tv.launcherx` — Google TV home screen (ad + recommendation rows), replaced by FLauncher.  \n  undo: `adb -s %s shell pm enable com.google.android.apps.tv.launcherx`\n\n' "$DEV" >> "$LOG"
-  ok "Disabled. Now: $0 reboot   and confirm FLauncher still comes up."
+  for p in "${cands[@]}"; do
+    local out; out="$("${A[@]}" shell pm disable-user --user 0 "$p" 2>&1 | tr -d '\r')"
+    if printf '%s' "$out" | grep -q 'new state: disabled'; then
+      ok "disabled $p"
+      grep -qxF "$p" "$RECORD" 2>/dev/null || printf '%s\n' "$p" >> "$RECORD"
+      printf -- '- `%s` — stock Android TV launcher (ad + recommendation rows), replaced by FLauncher.  \n  undo: `adb -s %s shell pm enable %s`\n' "$p" "$DEV" "$p" >> "$LOG"
+    else
+      warn "skipped $p ($out)"
+    fi
+  done
+  say ""
+  ok "Now: $0 reboot   then $0 status   to confirm FLauncher still owns Home."
 }
 
 # ------------------------------------------------------------- report
@@ -344,7 +362,7 @@ tv-debloat.sh - staged, fully reversible Android TV cleanup (TV_IP=$TV_IP)
   tweak                 animation scales -> 0.5
   trim                  pm trim-caches
   reboot                reboot and wait for reconnect
-  launcher              FLauncher checks, then disable launcherx
+  launcher              FLauncher checks, then disable the stock launcher(s)
   report                before/after table
   undo                  re-enable EVERYTHING + restore animations
   status                quick health check

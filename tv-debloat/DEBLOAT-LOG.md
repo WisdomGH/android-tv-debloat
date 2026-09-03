@@ -75,3 +75,50 @@ or as a single command:
 grep -v '^#' tv-debloat/kapatilanlar.txt | tr -d '\r' \
   | xargs -n1 -I{} adb -s 192.168.86.245:5555 shell pm enable {}
 ```
+
+---
+
+## Classification against the real device (108 enabled packages)
+
+Baseline `packages-enabled.txt` received from the TV. Result: **18 junk / 36 ask / 54 untouchable** (18+36+54 = 108, nothing unaccounted for).
+
+### Two corrections the real list forced
+
+**1. This is classic Android TV, not Google TV.** There is no
+`com.google.android.apps.tv.launcherx` on this set. The home screen is
+`com.google.android.tvlauncher`, and `com.google.android.leanbacklauncher` and
+`com.hisense.tv.customerlauncher` are also present. The `launcher` command was
+rewritten to resolve the actual HOME owner at runtime instead of hardcoding a
+package that does not exist. `com.android.boot.fallbackhome` was added to the
+protected set — it is the emergency home when no launcher resolves, i.e. the
+thing that prevents a black screen.
+
+**2. The TCL→Hisense translation was correct.** `com.mediatek.wwtv.tvcenter`
+is present and is this TV's `com.tcl.suspension` equivalent (inputs/source).
+Protected.
+
+### Protection additions prompted by the real list
+
+- `com.android.vpndialogs` — required for the VPN consent prompt. NordVPN is installed; disabling this can stop it connecting.
+- `com.hisense.kpad` — the physical key panel on the TV chassis; the only control path if the remote fails.
+- `com.mstar.netflixobserver`, `com.google.android.sss.authbridge` — Netflix support/auth on MStar silicon.
+- `com.mediatek.network`, `com.android.proxyhandler`, `com.android.pacprocessor` — connectivity plumbing.
+- `com.android.companiondevicemanager`, `com.android.defcontainer`, `com.android.boot.fallbackhome`.
+- `org.xbmc.kodi`, `org.videolan.vlc`, `com.nordvpn.android` — user-installed apps, never touched.
+
+### Two over-broad patterns found and anchored
+
+- `com\.google\.android\.leanbacklauncher` was swallowing
+  `com.google.android.leanbacklauncher.recommendations` — the ad-row provider,
+  the single most-wanted removal. Anchored with `$` so the launcher stays
+  protected while the recommendations sub-package became targetable.
+- `com\.google\.android\.youtube\.tv` was swallowing `youtube.tvkids` and
+  `youtube.tvmusic`. Anchored so only the main YouTube app is protected; the
+  Kids and Music variants moved to group 2 for the owner to decide.
+
+### Batches
+
+- `packages/batch-01.txt` — 10 packages, zero user-visible function. Kills the ad/recommendation rows.
+- `packages/batch-02.txt` — 8 packages, pending batch 1 passing the test checklist.
+
+Verified: no package in either batch matches a protected pattern.

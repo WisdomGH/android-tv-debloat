@@ -54,12 +54,12 @@ com\.android\.inputdevices
 # the launcher step unprotects it deliberately and only then. ---
 com\.google\.android\.apps\.tv\.launcherx
 com\.google\.android\.tvlauncher
-com\.google\.android\.leanbacklauncher
+com\.google\.android\.leanbacklauncher$
 
 # --- Your own acceptance tests depend on these. Netflix and YouTube must open. ---
 com\.netflix\.ninja
 com\.netflix\.mediaclient
-com\.google\.android\.youtube\.tv
+com\.google\.android\.youtube\.tv$
 com\.google\.android\.youtube\.tvunplugged
 
 # --- Sound is one of your test criteria. Never touch audio. ---
@@ -94,3 +94,38 @@ com\.google\.android\.tv\.axel
 com\.android\.server\.
 com\.google\.android\.overlay
 com\.android\.systemui\.overlay
+
+# ===== Added after seeing the real Hisense package list (108 pkgs) =====
+# This set is classic Android TV (leanback), NOT Google TV: there is no
+# com.google.android.apps.tv.launcherx. Three launchers exist instead.
+com\.google\.android\.tvlauncher
+com\.hisense\.tv\.customerlauncher
+com\.android\.boot\.fallbackhome
+# ^ fallbackhome is the emergency home when no launcher resolves. It is what
+#   saves you from a black screen. Never disable it.
+
+# Netflix support service on MStar/MediaTek silicon - Netflix is a test criterion.
+com\.mstar\.netflixobserver
+com\.google\.android\.sss\.authbridge
+
+# Networking / connectivity plumbing seen on this set.
+com\.mediatek\.network
+com\.android\.proxyhandler
+com\.android\.pacprocessor
+com\.android\.vpndialogs
+# ^ vpndialogs is required for the VPN consent prompt. You have NordVPN
+#   installed; disabling this can stop the VPN from ever connecting.
+
+# Remote/companion pairing + the TV's own physical buttons.
+com\.android\.companiondevicemanager
+com\.hisense\.kpad
+# ^ kpad = the physical key panel on the TV chassis. If the remote dies,
+#   this is the only way to control the set.
+
+# Package installation plumbing.
+com\.android\.defcontainer
+
+# Your own installed apps - never touched.
+org\.xbmc\.kodi
+org\.videolan\.vlc
+com\.nordvpn\.android

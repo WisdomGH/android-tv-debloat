@@ -1,0 +1,8 @@
+com.android.statementservice
+com.google.android.syncadapters.contacts
+com.google.android.syncadapters.calendar
+com.dsi.ant.service.socket
+com.dsi.ant.plugins.antplus
+com.hisense.storemode
+fusion.android.tv.demo
+com.google.android.tungsten.setupwraith
