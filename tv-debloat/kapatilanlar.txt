@@ -6,3 +6,21 @@
 #   grep -v '^#' kapatilanlar.txt | tr -d '\r' | xargs -n1 -I{} adb -s 192.168.86.245:5555 shell pm enable {}
 #
 # (nothing disabled yet - no device has been reached)
+com.google.android.tvrecommendations
+com.google.android.leanbacklauncher.recommendations
+com.google.android.backdrop
+com.android.dreams.basic
+com.android.wallpaperbackup
+com.android.printspooler
+com.google.android.feedback
+com.google.android.tv.bugreportsender
+com.google.android.partnersetup
+com.google.android.onetimeinitializer
+com.android.statementservice
+com.google.android.syncadapters.contacts
+com.google.android.syncadapters.calendar
+com.dsi.ant.service.socket
+com.dsi.ant.plugins.antplus
+com.hisense.storemode
+fusion.android.tv.demo
+com.google.android.tungsten.setupwraith

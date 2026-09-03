@@ -168,3 +168,53 @@ Caveats carried forward:
 - `com.google.android.marvin.talkback` (batch-03) is the screen reader. Only
   disable if nobody using the TV needs accessibility.
 - `com.google.android.backuptransport` (batch-04) ends cloud backup of app data.
+
+---
+
+## Batches 1 and 2 — APPLIED and verified 2026-09-03
+
+Run from Windows PowerShell. Owner confirmed all six checks passed:
+inputs/source, HDMI switch, Netflix, YouTube, sound, on-screen keyboard.
+
+### batch-01
+
+- `com.google.android.tvrecommendations` — Feeds the "Recommended for you" / sponsored rows on the home screen.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.tvrecommendations`
+- `com.google.android.leanbacklauncher.recommendations` — Older recommendation-row provider for the leanback home screen.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.leanbacklauncher.recommendations`
+- `com.google.android.backdrop` — Google TV ambient screensaver (the photo/art slideshow).  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.backdrop`
+- `com.android.dreams.basic` — Basic "Daydream" screensavers (clock, colours).  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.dreams.basic`
+- `com.android.wallpaperbackup` — Backs up wallpapers; a TV has no wallpaper worth backing up.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.wallpaperbackup`
+- `com.android.printspooler` — Printing subsystem. There is no printer.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.printspooler`
+- `com.google.android.feedback` — Sends crash + usage feedback reports to Google.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.feedback`
+- `com.google.android.tv.bugreportsender` — TV-specific bug report uploader.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.tv.bugreportsender`
+- `com.google.android.partnersetup` — Reports partner/OEM attribution data to Google.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.partnersetup`
+- `com.google.android.onetimeinitializer` — One-shot first-boot initialiser, dead weight afterwards.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.onetimeinitializer`
+
+### batch-02
+
+- `com.android.statementservice` — Verifies app-link statements; harmless to lose on a TV.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.android.statementservice`
+- `com.google.android.syncadapters.contacts` — Syncs Google Contacts to the TV.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.syncadapters.contacts`
+- `com.google.android.syncadapters.calendar` — Syncs Google Calendar to the TV.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.syncadapters.calendar`
+- `com.dsi.ant.service.socket` — ANT+ fitness-sensor radio socket service. A TV has no ANT+ radio.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.dsi.ant.service.socket`
+- `com.dsi.ant.plugins.antplus` — ANT+ plugin service for heart-rate straps etc. Useless on a TV.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.dsi.ant.plugins.antplus`
+- `com.hisense.storemode` — Hisense shop-floor demo mode.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.hisense.storemode`
+- `fusion.android.tv.demo` — In-store demo loop app.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable fusion.android.tv.demo`
+- `com.google.android.tungsten.setupwraith` — Google TV setup wizard; only runs at first boot / factory reset.  
+  undo: `adb -s 192.168.86.245:5555 shell pm enable com.google.android.tungsten.setupwraith`
+
