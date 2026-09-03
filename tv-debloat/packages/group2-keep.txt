@@ -1,0 +1,8 @@
+com.google.android.katniss
+com.google.android.speech.pumpkin
+com.hisense.tv.ota
+com.hisense.remoteupgrade
+com.mediatek.wwtv.setupwizard
+com.google.android.videos
+com.google.android.youtube.tvmusic
+com.google.android.apps.mediashell

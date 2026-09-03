@@ -1,0 +1,8 @@
+android.autoinstalls.config.hisense.laoshan
+com.android.cts.ctsshim
+com.android.cts.priv.ctsshim
+com.android.htmlviewer
+com.android.backupconfirm
+com.android.sharedstoragebackup
+com.google.android.backuptransport
+com.mstar.android.tv.disclaimercustomization

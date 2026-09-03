@@ -1,0 +1,13 @@
+# NOT scheduled for any batch. I told you I could not identify these with
+# confidence, and "I don't use it" does not tell me what it does. Rule 5.
+# These get a one-at-a-time pass at the very end, if you want them at all.
+com.hisense.tv.smartsense|Hisense "smart sense" - ACR viewing-data collection, or picture auto-adjust. Unresolved.
+com.hisense.tv.smartservice|Hisense smart service backend. Unresolved.
+com.vt.tv.smartsense.ui|UI front-end for the smartsense pair above. Unresolved.
+com.hisense.tv.speedup|Name implies a performance service. Disabling it could work against the goal.
+com.hisense.uifac|Likely factory/production UI, but unconfirmed.
+com.hisense.evservice|Unidentified Hisense service.
+com.hisense.tv.b2b|Hotel/commercial mode. Almost certainly unused at home, but vendor-coupled.
+com.hisense.hitv.hicloud.account|Hisense cloud account. YOU ARE KEEPING OTA + remoteupgrade, and Hisense firmware updates may authenticate through this. Real dependency risk.
+com.mediatek.androidbox|MediaTek system component. MediaTek packages are TV plumbing on this set.
+com.google.android.boot.appsplashscreen|Boot-path splash screen. Boot path is not where I gamble.

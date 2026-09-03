@@ -122,3 +122,49 @@ Protected.
 - `packages/batch-02.txt` — 8 packages, pending batch 1 passing the test checklist.
 
 Verified: no package in either batch matches a protected pattern.
+
+---
+
+## Group 2 resolved by the owner
+
+**Keeping (8):** `com.google.android.katniss`, `com.google.android.speech.pumpkin`,
+`com.hisense.tv.ota`, `com.hisense.remoteupgrade`, `com.mediatek.wwtv.setupwizard`,
+`com.google.android.videos`, `com.google.android.youtube.tvmusic`,
+`com.google.android.apps.mediashell`.
+
+Katniss and pumpkin are kept together, which is correct — pumpkin is the offline
+speech recogniser katniss depends on.
+
+**Held back, not scheduled (10):** see `packages/hold-uncertain.txt`. These are the
+packages flagged as unidentified when group 2 was presented. The owner's reply
+established that they are unused, not what they do, so rule 5 ("if you are not
+sure what a package does, ask before disabling") still applies. They get an
+optional one-at-a-time pass at the end rather than being folded into a batch.
+
+One is a live dependency risk worth restating: `com.hisense.hitv.hicloud.account`
+is the Hisense cloud account service, and the owner is **keeping** OTA and
+remoteupgrade. Hisense firmware updates may authenticate through it, so disabling
+it could silently break the updates they chose to retain.
+
+**Batched for disabling (18 from group 2):** `batch-03.txt` (10 preinstalled
+apps and vendor media services), `batch-04.txt` (8 low-level leftovers).
+
+### Batch plan
+
+| Batch | Count | Contents |
+|---|---|---|
+| batch-01 | 10 | Ad/recommendation rows, screensavers, telemetry |
+| batch-02 | 8 | Sync adapters, ANT+, demo modes, Google setup wizard |
+| batch-03 | 10 | Unused preinstalled apps, DLNA, Hisense push messaging |
+| batch-04 | 8 | CTS shims, backup transports, disclaimer screen |
+
+Verified before commit: no batch contains a protected package, a keep-list
+package, or a hold-list package. 36 batched + 8 keep + 10 hold = 54 = group 1
+(18) + group 2 (36).
+
+Caveats carried forward:
+- `com.google.android.tungsten.setupwraith` (batch-02) is what runs after a
+  factory reset. Re-enable it before ever resetting the TV.
+- `com.google.android.marvin.talkback` (batch-03) is the screen reader. Only
+  disable if nobody using the TV needs accessibility.
+- `com.google.android.backuptransport` (batch-04) ends cloud backup of app data.
